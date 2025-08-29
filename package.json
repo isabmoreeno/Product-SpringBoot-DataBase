@@ -1,0 +1,21 @@
+{
+  "name": "product",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isabmoreeno/Product-Java-SpringBoot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/isabmoreeno/Product-Java-SpringBoot/issues"
+  },
+  "homepage": "https://github.com/isabmoreeno/Product-Java-SpringBoot#readme"
+}
