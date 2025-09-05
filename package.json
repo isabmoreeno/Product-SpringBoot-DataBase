@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/isabmoreeno/Product-Java-SpringBoot/issues"
   },
-  "homepage": "https://github.com/isabmoreeno/Product-Java-SpringBoot#readme"
+  "homepage": "https://github.com/isabmoreeno/Product-Java-SpringBoot#readme",
+  "dependencies": {
+    "expo": "^53.0.22"
+  }
 }

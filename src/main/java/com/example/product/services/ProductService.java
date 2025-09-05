@@ -25,4 +25,17 @@ public class ProductService {
         return repository.findById(id)
                          .orElseThrow( ()-> new EntityNotFoundException("Produto não cadastrado"));
  }
+
+    public void deleteProductById(long id){
+		if(repository.existsById(id))
+		repository.deleteById(id);
+		    else
+			    throw new EntityNotFoundException("Produto não existe");
+
+}
+
+      public Product saveProduct(Product product){
+        return repository.save(product);
+   }
+
 }
