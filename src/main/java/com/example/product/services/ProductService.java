@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.product.entities.Product;
 import com.example.product.repositories.ProductRepository;
+import com.example.product.dtos.ProductRequest;
+import com.example.product.mappers.ProductMapper;
+
+
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -34,8 +38,17 @@ public class ProductService {
 
 }
 
-      public Product saveProduct(Product product){
-        return repository.save(product);
+   public Product saveProduct(ProductRequest request){
+        return repository.save(ProductMapper.toEntity(request));
+  }
+  
+   public void updateProduct(ProductRequest request, long id)
+   {
+        Product aux = repository.getReferenceById(id);
+        aux.setName(request.name());
+        aux.setPrice(request.price());
+
+        repository.save(aux);
    }
 
 }
