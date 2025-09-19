@@ -6,6 +6,9 @@ import java.util.Optional;
 import com.example.product.entities.Product;
 import com.example.product.repositories.ProductRepository;
 import com.example.product.services.ProductService;
+
+import jakarta.validation.Valid;
+
 import com.example.product.dtos.ProductRequest;
 import com.example.product.dtos.ProductResponse;
 import com.example.product.mappers.ProductMapper;
@@ -53,7 +56,7 @@ public class ProductController {
 
    
    @PostMapping
-    public ResponseEntity<ProductResponse> saveProduct(@RequestBody ProductRequest request)
+    public ResponseEntity<ProductResponse> saveProduct(@Valid @RequestBody ProductRequest request)
     {
         ProductResponse newProduct = service.saveProduct(request);
         
@@ -69,7 +72,7 @@ public class ProductController {
 
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateProduct( @PathVariable long id,
+    public ResponseEntity<Void> updateProduct( @PathVariable long id, @Valid
                                                @RequestBody ProductRequest request
                                               )
     {
