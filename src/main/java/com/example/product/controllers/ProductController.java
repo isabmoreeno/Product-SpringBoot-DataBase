@@ -7,6 +7,7 @@ import com.example.product.entities.Product;
 import com.example.product.repositories.ProductRepository;
 import com.example.product.services.ProductService;
 import com.example.product.dtos.ProductRequest;
+import com.example.product.dtos.ProductResponse;
 import com.example.product.mappers.ProductMapper;
 
 
@@ -35,12 +36,12 @@ public class ProductController {
     private ProductService service;
     
     @GetMapping
-    public ResponseEntity<List<Product>> getProducts(){
+    public ResponseEntity<List<ProductResponse>> getProducts(){
         return ResponseEntity.ok(service.getAllProducts());
     }
 
   @GetMapping("{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable long id) {
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable long id) {
         return ResponseEntity.ok(service.getProductById(id));
     }
 
@@ -52,14 +53,14 @@ public class ProductController {
 
    
    @PostMapping
-    public ResponseEntity<Product> saveProduct(@RequestBody ProductRequest request)
+    public ResponseEntity<ProductResponse> saveProduct(@RequestBody ProductRequest request)
     {
-        Product newProduct = service.saveProduct(request);
+        ProductResponse newProduct = service.saveProduct(request);
         
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(newProduct.getId())
+                .buildAndExpand(newProduct.id())
                 .toUri();
 
         return ResponseEntity.created(location)

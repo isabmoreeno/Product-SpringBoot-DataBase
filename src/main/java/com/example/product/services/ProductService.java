@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.product.entities.Product;
 import com.example.product.repositories.ProductRepository;
 import com.example.product.dtos.ProductRequest;
+import com.example.product.dtos.ProductResponse;
 import com.example.product.mappers.ProductMapper;
 
 
@@ -21,14 +22,19 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    public List<Product> getAllProducts() {
-        return repository.findAll();
+    public List<ProductResponse> getAllProducts() {
+      return repository.findAll()
+                .stream()
+                .map(ProductMapper::toDTO)
+                .toList();
+
     }
 
-    public Product getProductById(long id) {
+       public ProductResponse getProductById(long id) {
         return repository.findById(id)
-                         .orElseThrow( ()-> new EntityNotFoundException("Produto não cadastrado"));
- }
+                .map(ProductMapper::toDTO)
+                .orElseThrow(() -> new EntityNotFoundException("Produto não cadastrado"));
+    }
 
     public void deleteProductById(long id){
 		if(repository.existsById(id))
@@ -38,9 +44,11 @@ public class ProductService {
 
 }
 
-   public Product saveProduct(ProductRequest request){
-        return repository.save(ProductMapper.toEntity(request));
-  }
+    public ProductResponse saveProduct(ProductRequest request) {
+        Product product = ProductMapper.toEntity(request);
+        Product savedProduct = repository.save(product);
+        return ProductMapper.toDTO(savedProduct);
+    }
   
    public void updateProduct(ProductRequest request, long id)
    {
